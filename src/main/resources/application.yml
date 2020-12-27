@@ -11,3 +11,8 @@ logging:
   file:
     path: logs
     name: ${logging.file.path}/@project.artifactId@.log
+
+jira-manager.jiraUri: https://test-task-2020.atlassian.net
+jira-manager.userName: test_user_811@bk.ru
+jira-manager.apiToken: fkIaz87v3vWv8hUZgUcPE909
+jira-manager.language: en
