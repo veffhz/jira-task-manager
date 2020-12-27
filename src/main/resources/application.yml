@@ -1,0 +1,13 @@
+spring:
+  main:
+    banner-mode: "off"
+  application:
+    name: jira-task-manager
+
+server:
+  port: 8082
+
+logging:
+  file:
+    path: logs
+    name: ${logging.file.path}/@project.artifactId@.log
