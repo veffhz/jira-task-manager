@@ -34,6 +34,7 @@ public class TaskService {
 
         taskDto.getIssues().parallelStream().forEach(
                 issue -> {
+                    // Чтобы работало кеширование, getIssueTypeByName должен быть вызыван из другого компонента
                     IssueType issueType = jiraService.getIssueTypeByName(issue.getType());
 
                     jiraService.createIssue(

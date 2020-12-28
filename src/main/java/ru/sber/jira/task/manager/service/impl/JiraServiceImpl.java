@@ -32,14 +32,7 @@ public class JiraServiceImpl implements JiraService {
     @Override
     public BasicIssue createIssue(String projectKey, String issueName, String summary) {
         IssueType issueType = getIssueTypeByName(issueName);
-        IssueInput newIssue = new IssueInputBuilder()
-                .setProjectKey(projectKey)
-                .setIssueType(issueType)
-                .setSummary(summary).build();
-        IssueRestClient issueClient = jiraRestClient.getIssueClient();
-        BasicIssue createdIssue = issueClient.createIssue(newIssue).claim();
-        log.info("created issue {}", createdIssue.getKey());
-        return createdIssue;
+        return createIssue(projectKey, issueType, summary);
     }
 
     @Override
