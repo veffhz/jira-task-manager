@@ -15,7 +15,7 @@
 	<description>Test project</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>8</java.version>
 		<springfox.version>3.0.0</springfox.version>
 		<jira-rest-client.version>5.2.1</jira-rest-client.version>
 		<atlassian-fugue.version>4.7.2</atlassian-fugue.version>
