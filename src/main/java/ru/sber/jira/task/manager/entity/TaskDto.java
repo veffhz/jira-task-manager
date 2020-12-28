@@ -1,5 +1,6 @@
 package ru.sber.jira.task.manager.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class TaskDto {
     @NotBlank
+    @ApiModelProperty(notes = "Ключ проекта", required = true, example = "PR")
     private String projectKey;
     private List<@Valid Issue> issues;
 }

@@ -28,7 +28,7 @@ public class TaskApi {
     }
 
     @PostMapping(path = "/api/task/json", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @ApiOperation(value = "Запуск создания задач в Jira.", response = String.class)
+    @ApiOperation(value = "Запуск создания задач в Jira из json.", response = String.class)
     public ResponseEntity<String> startTask(@Valid @RequestBody TaskDto taskDto) {
         log.info("start task api call");
         taskService.runTask(taskDto);
@@ -36,7 +36,7 @@ public class TaskApi {
     }
 
     @PostMapping(path = "/api/task/file", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    @ApiOperation(value = "Запуск создания задач в Jira.", response = String.class)
+    @ApiOperation(value = "Запуск создания задач в Jira из json файла.", response = String.class)
     public ResponseEntity<String> startTaskFromFile(@RequestPart MultipartFile file) {
         log.info("start task api call");
         taskService.runTask(file);
