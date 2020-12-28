@@ -32,8 +32,8 @@ https://test-task-2020.atlassian.net/jira/software/c/projects/PR/issues
   включен английский язык - иначе ответы api jira будут на русском ("задача" вместо "task", например).  
   При дальнейшем развитиии сервиса нужно будет включить русский язык в enum Language. 
 
-* Аtlassian предоставляет зависимость для тестов `jira-rest-java-client-test`, но она тянет много библиотек и сейчас закомментирована.  
-
+* Аtlassian предоставляет зависимость для тестов `jira-rest-java-client-test`, но она тянет много библиотек и сейчас закомментирована.
+  При дальнейшем развитии сервиса нужно будет использовать ее вместо моков класса Mocks
 
 ### настройки сервиса (application.yml)
 * Порт 8082 указан в секции server, port
@@ -44,7 +44,7 @@ https://test-task-2020.atlassian.net/jira/software/c/projects/PR/issues
 Java 8, 11; Maven (опционально).
 
 ### сборка и запуск проекта
-`mvn clean package` (если Maven не установлен `./mvnw clean package`, `mvnw.cmd clean package` для win)
+`mvn clean package` (если Maven не установлен `./mvnw clean package`, или `mvnw.cmd clean package` для win)
 
 Протестировать api можно через swagger (OpenApi):  
 http://localhost:8082/swagger-ui/index.html
