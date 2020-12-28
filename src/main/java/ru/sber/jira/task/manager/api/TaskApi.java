@@ -7,12 +7,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import ru.sber.jira.task.manager.entity.TaskDto;
 import ru.sber.jira.task.manager.service.TaskService;
 
 @Slf4j
@@ -26,9 +25,17 @@ public class TaskApi {
         this.taskService = taskService;
     }
 
-    @PostMapping(path = "/api/task/load", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(path = "/api/task/json", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Запуск создания задач в Jira.", response = String.class)
-    public ResponseEntity<String> startTask(@RequestPart MultipartFile file) {
+    public ResponseEntity<String> startTask(@RequestBody TaskDto taskDto) {
+        log.info("start task api call");
+        taskService.runTask(taskDto);
+        return new ResponseEntity<>("Started!", HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/api/task/file", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @ApiOperation(value = "Запуск создания задач в Jira.", response = String.class)
+    public ResponseEntity<String> startTaskFromFile(@RequestPart MultipartFile file) {
         log.info("start task api call");
         taskService.runTask(file);
         return new ResponseEntity<>("Started!", HttpStatus.OK);

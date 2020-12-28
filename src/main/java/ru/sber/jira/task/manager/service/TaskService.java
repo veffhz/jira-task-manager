@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,22 +28,26 @@ public class TaskService {
         this.objectMapper = objectMapper;
     }
 
+    @Async
+    public void runTask(TaskDto taskDto) {
+        log.info("Beginning start task: {}", taskDto);
+
+        taskDto.getIssues().parallelStream().forEach(
+                issue -> {
+                    IssueType issueType = jiraService.getIssueTypeByName(issue.getType());
+
+                    jiraService.createIssue(
+                            taskDto.getProjectKey(), issueType, issue.getName()
+                    );
+                }
+        );
+    }
+
+    @Async
     public void runTask(MultipartFile file) {
         try {
             TaskDto taskDto = objectMapper.readValue(file.getInputStream(), TaskDto.class);
-
-            log.info("Beginning start task: {}", taskDto);
-
-            taskDto.getIssues().forEach(
-                    issue -> {
-                        IssueType issueType = jiraService.getIssueTypeByName(issue.getType());
-
-                        jiraService.createIssue(
-                                taskDto.getProjectKey(), issueType, issue.getName()
-                        );
-                    }
-            );
-
+            runTask(taskDto);
         } catch (IOException e) {
             throw new FileParseException(e.getMessage(), e);
         }
