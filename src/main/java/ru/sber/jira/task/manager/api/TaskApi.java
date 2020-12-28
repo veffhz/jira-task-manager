@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.sber.jira.task.manager.entity.TaskDto;
 import ru.sber.jira.task.manager.service.TaskService;
 
+import javax.validation.Valid;
+
 @Slf4j
 @RestController
 public class TaskApi {
@@ -27,7 +29,7 @@ public class TaskApi {
 
     @PostMapping(path = "/api/task/json", consumes = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Запуск создания задач в Jira.", response = String.class)
-    public ResponseEntity<String> startTask(@RequestBody TaskDto taskDto) {
+    public ResponseEntity<String> startTask(@Valid @RequestBody TaskDto taskDto) {
         log.info("start task api call");
         taskService.runTask(taskDto);
         return new ResponseEntity<>("Started!", HttpStatus.OK);
