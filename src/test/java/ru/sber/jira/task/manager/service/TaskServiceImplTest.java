@@ -1,5 +1,6 @@
 package ru.sber.jira.task.manager.service;
 
+import com.atlassian.jira.rest.client.api.domain.BasicIssue;
 import com.atlassian.jira.rest.client.api.domain.IssueType;
 
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -50,7 +51,9 @@ class TaskServiceImplTest {
         IssueType issueType = issueType();
 
         when(jiraService.getIssueTypeByName(TASK_NAME)).thenReturn(issueType);
-        when(jiraService.createIssue(anyString(), any(IssueType.class), contains("name"))).thenReturn(basicIssue());
+
+        BasicIssue basicIssue = basicIssue();
+        when(jiraService.createIssue(anyString(), any(IssueType.class), contains("name"))).thenReturn(basicIssue);
 
         taskService.runTask(taskDto);
 
@@ -67,7 +70,9 @@ class TaskServiceImplTest {
         IssueType issueType = issueType();
 
         when(jiraService.getIssueTypeByName(TASK_NAME)).thenReturn(issueType);
-        when(jiraService.createIssue(anyString(), any(IssueType.class), contains("name"))).thenReturn(basicIssue());
+
+        BasicIssue basicIssue = basicIssue();
+        when(jiraService.createIssue(anyString(), any(IssueType.class), contains("name"))).thenReturn(basicIssue);
 
         taskService.runTask(mockMultipartFile);
 

@@ -12,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.mockito.ArgumentCaptor;
-import org.mockito.ArgumentMatchers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -22,7 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.sber.jira.task.manager.service.impl.JiraServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -36,20 +34,6 @@ class JiraServiceImplTest {
 
     @SpyBean
     private JiraServiceImpl jiraService;
-
-    @Test
-    @DisplayName("Test invoke createIssue")
-    void shouldRunCreateIssueWithStringParam() {
-        String projectKey = "PR";
-        String issueName = "task";
-        String summary = "Task 1";
-
-        jiraService.createIssue(projectKey, issueName, summary);
-
-        verify(jiraService, times(1)).createIssue(
-                anyString(), ArgumentMatchers.any(IssueType.class), anyString()
-        );
-    }
 
     @Test
     @DisplayName("Test invoke createIssue")
