@@ -44,7 +44,8 @@ https://test-task-2020.atlassian.net/jira/software/c/projects/PR/issues
 Java 8, 11; Maven (опционально).
 
 ### сборка и запуск проекта
-`mvn clean package` (если Maven не установлен `./mvnw clean package`, или `mvnw.cmd clean package` для win)
+* `mvn clean package` (если Maven не установлен `./mvnw clean package`, или `mvnw.cmd clean package` для win)
+* `java -jar target/jira-task-manager-0.0.1-SNAPSHOT.jar`
 
 Протестировать api можно через swagger (OpenApi):  
 http://localhost:8082/swagger-ui/index.html
